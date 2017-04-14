@@ -1,13 +1,13 @@
+# !/usr/bin/python
+# -*- coding: utf-8 -*- #
+
 import requests
 from getpass import getpass
 from HTMLParser import HTMLParser
 from SidGetter import SidGetter
 from datetime import timedelta, datetime, tzinfo
 from Cinserter import *
-
-        
-# user = raw_input("Login: ")
-# password = getpass("Password: ")
+       
 
 def get_booked_lessons(user, password):
     session = requests.Session()
@@ -61,6 +61,7 @@ def main():
                 service.events().insert(calendarId='primary', body=event).execute()
             except discovery.HttpError:
                 service.events().insert(calendarId='primary', body={k:v for k, v in event.items() if k!='id'}).execute()
+            print "Reminder for lesson", lesson['lt'], "were successfull pushed"
     
 
 if __name__ == '__main__':
